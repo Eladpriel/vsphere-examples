@@ -1,9 +1,13 @@
 plugin: community.vmware.vmware_vm_inventory
+vc_endpoint: 10.0.0.100
 vc_user: administrator@vsphere.local
 vc_pass: Ab:123456!
 vc_dc_name: VXRAIL-Datacenter
 folder_name: VXRAIL-Datacenter
 cluster: VXRAIL_Cluster
+vm_name: elad-automated-vm
+datastore_name: VxRail-Virtual-SAN-Datastore-fd422ce4-f813-40fd-a67c-4517ca9b6b0c
+os_iso_ubuntu: d9b6295e-a859-f368-674c-54ab3a7741a2/ubuntu-20.04.2-desktop-amd64.iso
 strict: False
 validate_certs: False
 with_tags: True

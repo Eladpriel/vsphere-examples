@@ -1,0 +1,11 @@
+plugin: community.vmware.vmware_vm_inventory
+vc_user: administrator@vsphere.local
+vc_pass: Ab:123456!
+vc_dc_name: VXRAIL-Datacenter
+folder_name: VXRAIL-Datacenter
+cluster: VXRAIL_Cluster
+strict: False
+validate_certs: False
+with_tags: True
+hostnames:
+        - config.name

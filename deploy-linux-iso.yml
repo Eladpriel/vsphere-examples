@@ -1,0 +1,44 @@
+---
+- name : To test VM creation on vSphere
+  hosts  : localhost
+  gather_facts : False
+  tasks:
+
+   - name : Create a new vm from ISO
+     vmware_guest :
+        hostname: 10.0.0.100        
+        user: "{{ vc_user}}"
+        password: "{{ vc_pass}}"
+        validate_certs: no
+        datacenter: "{{ vc_dc_name }}"
+        folder: /{{ folder_name }}/vm
+        name: an-new-vm
+        state: poweredon
+        guest_id: centos64Guest
+        cluster: "{{ cluster }}"
+        cdrom:
+                - controller_number: 0 
+                  unit_number: 0
+                  state: present
+                  type: iso
+                  iso_path: '[VxRail-Virtual-SAN-Datastore-fd422ce4-f813-40fd-a67c-4517ca9b6b0c] d9b6295e-a859-f368-674c-54ab3a7741a2/ubuntu-20.04.2-desktop-amd64.iso'
+        customization:
+             autologon: True
+             existing_vm: True
+        hardware: 
+            num_cpus: 2
+            memory_mb: 8192
+        disk:
+           - size_gb: 40
+             datastore: VxRail-Virtual-SAN-Datastore-fd422ce4-f813-40fd-a67c-4517ca9b6b0c
+        networks:
+        - name: VM Network
+          type: dhcp
+          device_type: vmxnet3
+          hostname: ansible-testing.domain.da
+          allow_guest_control: True
+          wait_for_ip_address: yes
+     register : new_vm
+
+   - debug:
+       var: new_vm
